@@ -4,193 +4,156 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jordan Clifford — Portfolio</title>
-  <meta name="description" content="Personal portfolio of Jordan Clifford: projects, resume, and contact." />
   <style>
-    /* ====== Design tokens ====== */
-    :root{
-      --bg: #0b0c10;
-      --card: #111319;
-      --text: #e6e6e6;
-      --muted:#a7a9b2;
-      --accent:#7c5cff; /* tweak this to your favorite color */
-      --accent-2:#4ad6ff;
-      --border: #22242d;
-      --link: #b6a5ff;
-      --radius: 16px;
-      --shadow: 0 8px 40px rgba(0,0,0,.35);
-      --max: 980px;
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: linear-gradient(180deg, #f57600, #eb68f7);
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(115, 39, 238, 0.75);
+    }
+    header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      margin: 0.2rem 0;
+      font-size: 1.8rem;
+    }
+    header p {
+      margin: 0;
+      color: #ccc;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font: 500 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
-      color:var(--text);
-      background:radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,.15), transparent 60%),
-                 radial-gradient(1000px 400px at 110% 10%, rgba(74,214,255,.10), transparent 60%),
-                 var(--bg);
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(57, 148, 5, 0.1);
+      color: #fff;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
     }
 
-    a{color:var(--link); text-decoration: none}
-    a:hover{text-decoration:underline}
-
-    .wrap{max-width:var(--max); margin:auto; padding:28px}
-
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-      padding:18px 0 8px;
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
     }
-    .brand{display:flex; align-items:center; gap:14px}
-    .brand img{width:52px; height:52px; border-radius:50%; border:2px solid var(--border)}
-    .brand h1{font-size:20px; margin:0}
-    .brand .tag{color:var(--muted); font-size:14px; margin-top:-2px}
 
-    nav{display:flex; gap:14px; flex-wrap:wrap}
-    .btn{
-      padding:10px 14px; border-radius:12px; border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); color:var(--text);
+    section {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
     }
-    .btn:hover{border-color:#2c2f3a}
-    .btn--primary{background:linear-gradient(180deg, var(--accent), #5b3df3); border:none; color:white}
-    .btn--primary:hover{filter:brightness(1.05)}
-
-    .hero{
-      margin:22px 0 14px; padding:24px; border:1px solid var(--border); border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(124,92,255,.12), rgba(124,92,255,0) 35%),
-                 linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)), var(--card);
-      box-shadow: var(--shadow);
+    section h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      border-bottom: 2px solid #dd4c7d;
+      padding-bottom: 0.5rem;
     }
-    .hero h2{margin:0 0 8px; font-size:28px; letter-spacing:.2px}
-    .hero p{margin:0; color:var(--muted)}
-
-    .grid{display:grid; gap:18px}
-    @media (min-width: 760px){ .grid{grid-template-columns:2fr 1fr} }
-
-    .card{border:1px solid var(--border); border-radius:var(--radius); background:var(--card); padding:18px}
-    .card h3{margin:0 0 8px}
-
-    /* Projects */
-    .projects{display:grid; gap:14px}
-    @media (min-width:760px){ .projects{grid-template-columns: repeat(2, 1fr)} }
-    @media (min-width:1100px){ .projects{grid-template-columns: repeat(3, 1fr)} }
-    .project{
-      border:1px solid var(--border); border-radius:14px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    .project {
+      margin-bottom: 1.5rem;
     }
-    .project .thumb{aspect-ratio: 16/9; background:#0d0f15; display:grid; place-items:center; font-size:13px; color:var(--muted)}
-    .project .body{padding:14px}
-    .project .title{display:flex; align-items:center; justify-content:space-between; gap:8px}
-    .pill{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
-    .project .desc{color:var(--muted); margin:6px 0 10px}
-    .project .links{display:flex; gap:10px; flex-wrap:wrap}
+    .project h3 {
+      margin: 0.2rem 0;
+      font-size: 1.3rem;
+      color: #fff;
+    }
+    .tags {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-bottom: 0.5rem;
+    }
+    .project p {
+      margin: 0.4rem 0 0;
+      color: #ccc;
+    }
 
-    footer{opacity:.8; color:var(--muted); text-align:center; padding:28px 0}
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: rgba(0,0,0,0.8);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    a {
+      color: #7dbbff;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <img src="https://avatars.githubusercontent.com/u/9919?s=80" alt="Avatar placeholder" />
-        <div>
-          <h1>Jordan Clifford</h1>
-          <div class="tag">Computer Science @ ASU · SWE / ML · HCI</div>
-        </div>
-      </div>
-      <nav>
-        <a class="btn" href="#projects">Projects</a>
-        <a class="btn" href="#about">About</a>
-        <a class="btn" href="#contact">Contact</a>
-        <a class="btn btn--primary" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-      </nav>
-    </header>
+  <header>
+    <img src="https://github.com/jordanjasonclifford.png" alt="Jordan Clifford" />
+    <h1>Jordan Clifford</h1>
+    <p>Computer Science @ ASU · SWE / ML</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <!-- <a href="resume.pdf" target="_blank">Resume</a> -->
+    </nav>
+  </header>
 
-    <section class="hero" id="about" aria-labelledby="intro-heading">
-      <h2 id="intro-heading">Hi — I build practical ML + web experiences</h2>
-      <p>
-        I’m a CS student focused on multimodal routing research, computer vision on the edge, and clean web UIs. Here are a few projects I’m proud of and how to reach me.
-      </p>
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hey there, I’m a CS student. Here are a few projects I’m proud of and how to reach me.</p>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h3 id="projects">Projects</h3>
-        <div class="projects" id="projectsGrid" aria-live="polite"></div>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3>Hybrid Travel Optimization</h3>
+        <div class="tags">Python · ML · Flask</div>
+        <p>24k+ real-world routes, Random Forest travel-time predictor, emissions-aware scoring, and a small Flask demo.</p>
       </div>
-
-      <aside class="card" id="contact">
-        <h3>Contact</h3>
-        <p>Email: <a href="mailto:jordanjasonclifford@gmail.com">jordanjasonclifford@gmail.com</a><br/>
-           GitHub: <a href="https://github.com/jordanjasonclifford" target="_blank" rel="noopener">@jordanjasonclifford</a><br/>
-           LinkedIn: <a href="https://www.linkedin.com/in/jordanjasonclifford" target="_blank" rel="noopener">/in/jordanjasonclifford</a>
-        </p>
-        <p class="pill">Available for internships</p>
-      </aside>
+      <div class="project">
+        <h3>EdgeVision AI Toolkit</h3>
+        <div class="tags">TensorFlow Lite · OpenCV · Docker</div>
+        <p>SSD-MobileNet-V2 on edge devices with transformation overlays and Go2RTC streaming.</p>
+      </div>
+      <div class="project">
+        <h3>Graph Search Visualizer</h3>
+        <div class="tags">JavaScript · BFS/DFS · UX</div>
+        <p>Interactive visualization of BFS, DFS, and random-walk strategies with crisp UI and keyboard controls.</p>
+      </div>
     </section>
 
-    <footer>
-      <span id="year"></span> © Jordan Clifford • Built with vanilla JS • Hosted on GitHub Pages
-    </footer>
-  </div>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:jordanjasonclifford@gmail.com">jordanjasonclifford@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/jordanjasonclifford">@jordanjasonclifford</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/jordan-jason-clifford/">/in/jordan-jason-clifford</a></p>
+      <p><strong>Available for internships / Full-Time positions</strong></p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Jordan Clifford • Built with vanilla JS • Hosted on GitHub Pages
+  </footer>
 
   <script>
-    // ====== Edit your projects here ======
-    const projects = [
-      {
-        title: "Hybrid Travel Optimization",
-        tags: ["Python", "ML", "Flask"],
-        desc: "24k+ real-world routes, Random Forest travel-time predictor, emissions-aware scoring, and a small Flask demo.",
-        demo: "#",
-        source: "#"
-      },
-      {
-        title: "EdgeVision AI Toolkit",
-        tags: ["TensorFlow Lite", "OpenCV", "Docker"],
-        desc: "SSD-MobileNet-V2 on edge devices with transformation overlays and Go2RTC streaming.",
-        demo: "#",
-        source: "#"
-      },
-      {
-        title: "Graph Search Visualizer",
-        tags: ["JavaScript", "BFS/DFS", "UX"],
-        desc: "Interactive visualization of BFS, DFS, and random-walk strategies with crisp UI and keyboard controls.",
-        demo: "#",
-        source: "#"
-      }
-    ];
-
-    const grid = document.getElementById('projectsGrid');
-    const el = (tag, cls, text) => { const n=document.createElement(tag); if(cls) n.className=cls; if(text) n.textContent=text; return n; };
-
-    projects.forEach(p => {
-      const card = el('article', 'project');
-      const thumb = el('div', 'thumb');
-      thumb.textContent = 'Screenshot / thumbnail';
-
-      const body = el('div', 'body');
-      const title = el('div', 'title');
-      title.append(el('h4', null, p.title));
-      const pillbox = el('div');
-      p.tags.forEach(t => pillbox.append(el('span', 'pill', t)));
-      title.append(pillbox);
-
-      const desc = el('p', 'desc', p.desc);
-
-      const links = el('div', 'links');
-      if(p.demo && p.demo !== '#'){
-        const aDemo = el('a'); aDemo.href=p.demo; aDemo.textContent='Live Demo'; aDemo.target='_blank'; aDemo.rel='noopener'; links.append(aDemo);
-      }
-      if(p.source && p.source !== '#'){
-        const aSrc = el('a'); aSrc.href=p.source; aSrc.textContent='Source'; aSrc.target='_blank'; aSrc.rel='noopener'; links.append(aSrc);
-      }
-
-      body.append(title, desc, links);
-      card.append(thumb, body);
-      grid.append(card);
-    });
-
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
